@@ -1,8 +1,8 @@
 #include <Python.h>
 
-#include "dash.h"
+#include "arctic.h"
 
-static PyObject *dash_getpowhash(PyObject *self, PyObject *args)
+static PyObject *arctic_getpowhash(PyObject *self, PyObject *args)
 {
     char *output;
     PyObject *value;
@@ -17,9 +17,9 @@ static PyObject *dash_getpowhash(PyObject *self, PyObject *args)
     output = PyMem_Malloc(32);
 
 #if PY_MAJOR_VERSION >= 3
-    dash_hash((char *)PyBytes_AsString((PyObject*) input), output);
+    arctic_hash((char *)PyBytes_AsString((PyObject*) input), output);
 #else
-    dash_hash((char *)PyString_AsString((PyObject*) input), output);
+    arctic_hash((char *)PyString_AsString((PyObject*) input), output);
 #endif
     Py_DECREF(input);
 #if PY_MAJOR_VERSION >= 3
@@ -31,27 +31,27 @@ static PyObject *dash_getpowhash(PyObject *self, PyObject *args)
     return value;
 }
 
-static PyMethodDef DashMethods[] = {
-    { "getPoWHash", dash_getpowhash, METH_VARARGS, "Returns the proof of work hash using dash hash" },
+static PyMethodDef ArcticMethods[] = {
+    { "getPoWHash", arctic_getpowhash, METH_VARARGS, "Returns the proof of work hash using arctic hash" },
     { NULL, NULL, 0, NULL }
 };
 
 #if PY_MAJOR_VERSION >= 3
-static struct PyModuleDef DashModule = {
+static struct PyModuleDef ArcticModule = {
     PyModuleDef_HEAD_INIT,
-    "dash_hash",
+    "arctic_hash",
     "...",
     -1,
-    DashMethods
+    ArcticMethods
 };
 
-PyMODINIT_FUNC PyInit_dash_hash(void) {
-    return PyModule_Create(&DashModule);
+PyMODINIT_FUNC PyInit_arctic_hash(void) {
+    return PyModule_Create(&ArcticModule);
 }
 
 #else
 
-PyMODINIT_FUNC initdash_hash(void) {
-    (void) Py_InitModule("dash_hash", DashMethods);
+PyMODINIT_FUNC initarctic_hash(void) {
+    (void) Py_InitModule("arctic_hash", ArcticMethods);
 }
 #endif

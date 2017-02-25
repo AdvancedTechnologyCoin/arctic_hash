@@ -1,7 +1,7 @@
-dash_hash (python) v1.3.1
+arctic_hash (python) v1.3.1
 ===========================
 
-Python module for Dash's X11 hashing.
+Python module for Arctic's X11 hashing.
 
 
 Install
